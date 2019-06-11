@@ -4,7 +4,7 @@ import * as auth from '../../utilities/auth_util.js'
 export default class LoginSignup extends Component {
 
     componentWillMount(){
-        auth.logout().then(()=>{console.log("e log")})
+        this.props.logout()
     }
     constructor(props){
         super(props)
@@ -33,6 +33,7 @@ export default class LoginSignup extends Component {
 
     redirect =()=>{
         if(this.props.auth.errors){
+            console.log(this.props.auth)
             alert("there are errors")
         }else{
             this.props.history.push("/tasks")

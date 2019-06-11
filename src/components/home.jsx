@@ -10,7 +10,7 @@ export default class Home extends Component {
       <div className="h-100 bg-danger">
         <img src={red_logo_trans} alt="" className="rounded"/>
         <NavLink to={'login'}className="btn btn-outline-warning">Login</NavLink>
-        <NavLink to={'logout'}className="btn btn-outline-warning m-2">SignUp</NavLink>
+        <NavLink to={'signup'}className="btn btn-outline-warning m-2">SignUp</NavLink>
       </div>
     );
   }

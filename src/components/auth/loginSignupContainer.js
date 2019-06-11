@@ -12,7 +12,9 @@ const mapStateToProps = (state, {location}) => {
 const mapDispatchToProps = (dispatch, {location}) =>{
     const processType = (location.pathname.slice(1) == 'login')? AuthActions.login: AuthActions.signup
     return {
-        process: user => dispatch(processType(user))
+        process: user => dispatch(processType(user)),
+        logout: () => dispatch(AuthActions.logout())
+        
     }
 
 }

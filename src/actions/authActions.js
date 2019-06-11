@@ -1,4 +1,4 @@
-import {LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS} from './types'
+import {LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS} from './types'
 import * as AuthUtil from "../utilities/auth_util.js"
 
 export const loginSuccess = (data) =>({
@@ -22,6 +22,15 @@ export const signupFailure = (data) =>({
 })
 
 
+export const logoutSuccess = (data) =>({
+    type: LOGOUT_SUCCESS
+})
+
+export const logoutFailure = (data) =>({
+    type: LOGOUT_FAILURE,
+    payload: data
+})
+
 
 
 
@@ -38,18 +47,37 @@ export const signupFailure = (data) =>({
 // }
 
 export const login = ({username, password}) => (dispatch) =>{
-    return AuthUtil.login(username,password).then(data => {
-        const token = data.data.token
+    return AuthUtil.login(username,password).then(res => {
+        const token = res.data.token
         localStorage.setItem('token', token)
-        dispatch(loginSuccess(data))}).catch(err => dispatch(loginFailure(err)))
+        dispatch(loginSuccess(token))}).catch(err => dispatch(loginFailure(err)))
+}
+
+export const logout = () => (dispatch) =>(
+    AuthUtil.logout().then(() => {
+        localStorage.removeItem("token")
+        dispatch(logoutSuccess())}).catch(err => {dispatch(logoutFailure(err))})
+)
+
+
+export const checkAuthState = () => (dispatch) =>{
+    const token = localStorage.getItem('token')
+    if (token === undefined){
+        dispatch(logout())
+    }else{
+        dispatch(loginSuccess(token))
+    }
 }
 
 export const signup = ({username, password, email}) => (dispatch) =>{
-    return AuthUtil.signup(username,password,email).then(data=>{
-        if(!data.ok){
-            throw Error("wrong")
-        }else{
-            return data.json()
+    return AuthUtil.signup(username,password,email).then(
+        res =>{
+            const token = res.data.token
+            console.log(res)
+            localStorage.setItem("token", token)
+            dispatch(signupSuccess(token))
         }
-    }).then(data =>{dispatch(signupSuccess(data))}).catch(err => dispatch(signupFailure(err)))
+        ).catch(err => {
+            console.log("this is being called")
+            dispatch(signupFailure(err))})
 }
