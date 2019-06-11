@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import {Link, withRouter} from 'react-router-dom';
-
+import * as auth from '../../utilities/auth_util.js'
 export default class LoginSignup extends Component {
+
+    componentWillMount(){
+        auth.logout().then(()=>{console.log("e log")})
+    }
     constructor(props){
         super(props)
         this.state = {
@@ -21,8 +25,19 @@ export default class LoginSignup extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         const user = Object.assign({},this.state)
-        this.props.process(user)
+        console.log(this.props)
+        this.props.process(user).then(()=>{
+            this.redirect()
+        })
     } 
+
+    redirect =()=>{
+        if(this.props.auth.errors){
+            alert("there are errors")
+        }else{
+            this.props.history.push("/tasks")
+        }
+    }
 
     getLinks = () =>{
         let emailTop, bottomLink;

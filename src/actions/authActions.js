@@ -25,22 +25,31 @@ export const signupFailure = (data) =>({
 
 
 
+// export const login = ({username, password}) => (dispatch) =>{
+//     return AuthUtil.login(username,password).then(data=> {
+//         if (!data.ok){
+//             throw Error("incorrect")
+//         }else{
+//             return data.json()
+//         }
+//     }).then(data => {
+//         console.log(data)
+//         dispatch(loginSuccess(data))}).catch(err => dispatch(loginFailure(err)))
+// }
+
 export const login = ({username, password}) => (dispatch) =>{
-    AuthUtil.login(username,password).then(data=> {
-        if (!data.ok){
-            throw Error("incorrect")
-        }else{
-            data.json()
-        }
-    }).then(data => {dispatch(loginSuccess(data))}).catch(err => console.log(err))
+    return AuthUtil.login(username,password).then(data => {
+        const token = data.data.token
+        localStorage.setItem('token', token)
+        dispatch(loginSuccess(data))}).catch(err => dispatch(loginFailure(err)))
 }
 
 export const signup = ({username, password, email}) => (dispatch) =>{
-    AuthUtil.signup(username,password,email).then(data=>{
+    return AuthUtil.signup(username,password,email).then(data=>{
         if(!data.ok){
             throw Error("wrong")
         }else{
-            data.json()
+            return data.json()
         }
-    }).then(data =>{dispatch(signupSuccess(data))}).catch(err => console.log(err))
+    }).then(data =>{dispatch(signupSuccess(data))}).catch(err => dispatch(signupFailure(err)))
 }

@@ -4,7 +4,8 @@ import * as AuthActions from "../../actions/authActions"
 const mapStateToProps = (state, {location}) => {
     const formType = location.pathname.slice(1)
     return {
-      formType  
+      formType,
+      auth: state.auth
     }
 }
 

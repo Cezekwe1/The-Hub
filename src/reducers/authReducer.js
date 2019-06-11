@@ -1,7 +1,9 @@
 import {LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP_SUCCESS, SIGNUP_FAILURE} from '../actions/types'
 
+
 const instialState = {
-    user:{}
+    worked: null, 
+    errors: null
 }
 
 
@@ -11,17 +13,21 @@ export default function(state = instialState, action){
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                worked : "it worked"
+                worked : "it worked",
+                errors : null
             }
+        case SIGNUP_FAILURE:
         case LOGIN_FAILURE:
             return {
                 ...state,
+                worked: null,
                 errors: "Invalid Credentials"
             }
         case SIGNUP_SUCCESS:
             return {
                 ...state,
-                worked: "it worked to signup"
+                worked: "it worked to signup",
+                errors: null
             }
 
         default: 

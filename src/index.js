@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Root from './root'
 import store from './store'
+window.store = store
 
 ReactDOM.render(<Root store={store} />, document.getElementById('root'));
 

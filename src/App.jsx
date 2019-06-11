@@ -7,7 +7,8 @@ import {
   Link,
   HashRouter
 } from 'react-router-dom';
-import LoginLogoutContainer from "./components/auth/loginSignup"
+import LoginSignUpContainer from "./components/auth/loginSignupContainer"
+import TasksContainer from "./components/tasks/tasksContainer"
 import Home from './components/home'
 import './App.css'
 
@@ -16,8 +17,9 @@ function App() {
       <div className="h-100">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/login" component={LoginLogoutContainer} />
-          <Route path="/signup" component={LoginLogoutContainer} />
+          <Route path="/login" component={LoginSignUpContainer} />
+          <Route path="/signup" component={LoginSignUpContainer} />
+          <Route path="/tasks" component={TasksContainer} />
         </Switch>
       </div>
   );

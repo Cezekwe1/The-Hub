@@ -1,11 +1,13 @@
 import {connect} from 'react-redux'
 import Tasks from "./tasks";
-mapStateToProps = () =>({
-
+import * as Tasks_Actions from "../../actions/tasksActions"
+const mapStateToProps = (state) =>({
+    tasks: state.tasks,
+    auth: state.auth
 })
 
-mapDispatchToProps = (dispatch) =>({
-    
+const mapDispatchToProps = (dispatch) =>({
+    getTasks: () => dispatch(Tasks_Actions.getAllTasksAction())
 })
 
-connect(mapStateToProps,mapDispatchToProps)(Tasks)
+export default connect(mapStateToProps,mapDispatchToProps)(Tasks)
