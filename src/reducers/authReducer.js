@@ -8,53 +8,48 @@ import {
 } from "../actions/types";
 
 const instialState = {
+  username: null,
   token: null,
-  errors: null
+  organizations: [],
+  current_organization: null,
+  friends: [],
+  organization_members: [],
+  errors: null,
 };
 
 export default function(state = instialState, action) {
   Object.freeze(state);
   switch (action.type) {
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        token: action.payload,
-        errors: null
-      };
-      break;
     case SIGNUP_FAILURE:
-        console.log("your in signup failure");
-      return {
-        ...state,
-        token: null,
-        errors: "Invalid Credentials"
-      };
     case LOGIN_FAILURE:
-      return {
-        ...state,
-        token: null,
-        errors: "Invalid Credentials"
-      };
-      break;
     case LOGOUT_FAILURE:
       return {
         ...state,
-        errors: action.payload
+        token: null,
+        username: null,
+        current_organization: null,
+        organizations: null,
+        friends: null,
+        organization_members: null,
+        errors: "invalid"
       };
       break;
+    case LOGIN_SUCCESS:
     case SIGNUP_SUCCESS:
       console.log("your in signup success");
       return {
         ...state,
-        token: action.payload,
+        username: action.payload.username,
+        token: action.payload.token,
+        current_organization: action.payload.current_organization,
+        friends: action.payload.friends,
+        organization_members: action.payload.organization_members,
+        organizations: action.payload.organizations,
         errors: null
       };
       break;
     case LOGOUT_SUCCESS:
-      return {
-        token: null,
-        errors: null
-      };
+      return instialState
       break;
     default:
       return state;

@@ -11,11 +11,11 @@ export default (state = intialState, action) =>{
     Object.freeze(state)
     switch(action.type){
         case GETALL_TASKS_SUCCESS:
-            console.log(action.payload.data)
+            console.log(action.payload)
             return {
                 ...newState,
-                myTasks : [...state.myTasks,...action.payload.data],
-                orgTasks: [...state.myTasks,...action.payload["data"]] 
+                myTasks : [...action.payload.my_tasks],
+                orgTasks: [...action.payload.org_tasks] 
             }
         break; 
         case GETALL_TASKS_FAILURE:

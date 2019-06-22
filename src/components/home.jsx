@@ -7,9 +7,9 @@ import {NavLink} from 'react-router-dom';
 export default class Home extends Component {
   render() {
     return (
-      <div className="h-100 bg-danger">
-        <img src={red_logo_trans} alt="" className="rounded"/>
-        <NavLink to={'login'}className="btn btn-outline-warning">Login</NavLink>
+      <div className="h-100 bg-danger ">
+        <img src={red_logo_trans} alt="" className="rounded img-fluid h-75"/>
+        <NavLink to={'login'}className="btn  btn-outline-warning">Login</NavLink>
         <NavLink to={'signup'}className="btn btn-outline-warning m-2">SignUp</NavLink>
       </div>
     );

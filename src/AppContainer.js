@@ -4,6 +4,7 @@ import * as AuthActions from './actions/authActions'
 
 
 const mapStateToProps = (state) =>({
+    coin: state.auth,
     isAuthenticated: state.auth.token !== null
 })
 
