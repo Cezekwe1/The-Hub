@@ -6,6 +6,7 @@ import red_logo_trans from "../red_logo_transparent.png"
 import {NavLink} from 'react-router-dom';
 export default class Home extends Component {
   render() {
+    console.log(process.env.NODE_ENV)
     return (
       <div className="h-100 bg-danger ">
         <img src={red_logo_trans} alt="" className="rounded img-fluid h-75"/>
