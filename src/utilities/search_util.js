@@ -1,5 +1,6 @@
 import Trie from "./Trie"
-
+import axios from 'axios'
+import {API_URL} from "../config"
 export const processMembers = (members) =>{
     var trie = new Trie();
     
@@ -8,4 +9,10 @@ export const processMembers = (members) =>{
     }
     return trie
 }
+
+export const search = (str) =>{
+    return axios.get(`${API_URL}/users/search/${str}`,{headers: {"Authorization": "Token " + localStorage.getItem("token")}})
+}
+
+
 

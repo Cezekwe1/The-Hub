@@ -9,7 +9,8 @@ const mapStateToProps = (state) =>({
 const mapDispatchToProps = (dispatch) =>({
     getTasks: () => dispatch(Tasks_Actions.getAllTasksAction()),
     delTask: (id) => dispatch(Tasks_Actions.delTask(id)),
-    updateTask: (id,newInfo) => dispatch(Tasks_Actions.updateTask(id,newInfo))
+    updateTask: (id,newInfo) => dispatch(Tasks_Actions.updateTask(id,newInfo)),
+    makeTask: (task)=> dispatch(Tasks_Actions.makeTask(task))
 
 })
 

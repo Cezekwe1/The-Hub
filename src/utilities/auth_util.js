@@ -1,17 +1,26 @@
 import axios from 'axios'
-
+import {API_URL} from "../config"
 
 export const login = (username, password) => {
     let h = new Headers();
-    return axios.post( "http://127.0.0.1:8000/users/auth/login/", {username,password})
+    return axios.post( `${API_URL}/users/auth/login/`, {username,password})
 }
 
 export const signup = (username, password, email) => {
-    return axios.post( "http://127.0.0.1:8000/users/auth/signup/", {username,password,email})
+    return axios.post( `${API_URL}/users/auth/signup/`, {username,password,email})
 }
 
 export const logout = () =>{
-    return fetch( "http://127.0.0.1:8000/users/auth/logout/", {
-        method: 'POST'
-    })
+    return axios.post(`${API_URL}/users/auth/logout/`,{},{headers: {"Authorization": "Token " + localStorage.getItem("token")}})
 }
+
+export const changeCurrentOrg = (id) =>{
+    return axios.post(`${API_URL}/users/change/org`,{org_id: id},{headers: {"Authorization": "Token " + localStorage.getItem("token")}})
+}
+
+export const addOrg = (data) =>{
+    return axios.post(`${API_URL}/orgs/create`,data,{headers: {"Authorization": "Token " + localStorage.getItem("token")}})
+}
+
+
+

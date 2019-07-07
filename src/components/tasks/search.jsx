@@ -14,7 +14,7 @@ export class search extends Component {
             list =  <ul>{this.state.members.map((member)=>{return <li>{member.name}</li>})}</ul>
         }else{
             if (this.state.filteredMembers.length > 0){
-                list = <ul className="list-group">{this.state.filteredMembers.map((member)=>{return <li className="list-group-item"  onClick={this.assignOwner(member)} key={member.id}>{member.username}</li>})}</ul>
+                list = <ul className="list-group position-absolute">{this.state.filteredMembers.map((member)=>{return <li className="list-group-item"  onClick={this.assignOwner(member)} key={member.id}>{member.username}</li>})}</ul>
             }else{
                 list = ""
             }
